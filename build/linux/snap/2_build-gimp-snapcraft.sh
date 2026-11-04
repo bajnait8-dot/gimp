@@ -28,6 +28,12 @@ if [ "$GITLAB_CI" ]; then
 fi
 
 
+# Pass through the environment variable showing it's a MR build.
+if [ -n "$CI_MERGE_REQUEST_IID" ]; then
+  echo "$CI_MERGE_REQUEST_IID" > .gitlab/CI_MERGE_REQUEST_IID
+fi
+
+
 # Prepare env (snapcraft does not allow to freely set the .yaml path)
 cp build/linux/snap/snapcraft.yaml .
 

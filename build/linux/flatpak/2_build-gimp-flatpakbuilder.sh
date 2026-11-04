@@ -30,6 +30,12 @@ if [ "$GITLAB_CI" ]; then
 fi
 
 
+# Pass through the environment variable showing it's a MR build.
+if [ -n "$CI_MERGE_REQUEST_IID" ]; then
+  echo "$CI_MERGE_REQUEST_IID" > .gitlab/CI_MERGE_REQUEST_IID
+fi
+
+
 # Prepare env (only GIMP_PREFIX is needed for flatpak)
 if [ -z "$GIMP_PREFIX" ]; then
   export GIMP_PREFIX="$PWD/../_install"
